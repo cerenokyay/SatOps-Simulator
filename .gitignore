@@ -1,0 +1,23 @@
+# C++ Derlenmiş Dosyalar
+*.o
+*.out
+*.exe
+sim
+flight_software/sim
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# İşletim Sistemi ve IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Veritabanı
+*.db
+*.sqlite3
