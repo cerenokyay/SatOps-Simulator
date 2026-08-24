@@ -3,3 +3,8 @@ uvicorn
 streamlit
 pydantic
 sqlalchemy
+requests
+folium
+streamlit-folium
+scikit-learn
+onnxruntime
