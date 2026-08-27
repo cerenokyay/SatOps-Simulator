@@ -23,3 +23,20 @@ Proje iki ana fazdan ve birbirine entegre üç sistemden oluşmaktadır:
 * **Frontend:** Streamlit, Folium, Leaflet.js
 * **Simülasyon:** C++17 (Socket Programming)
 * **Yapay Zeka (AI/ML):** scikit-learn, ONNX Runtime (Geliştirme Aşamasında)
+
+
+
+## 🔬 Örnek Olay İncelemesi (Case Study): Görüntü İşlemede Sınır Durumlar (Edge Cases)
+
+**Test Senaryosu:** Karadeniz Üzerindeki Fitoplankton Patlamaları (Phytoplankton Blooms)
+**Kullanılan Model:** RGB Piksel Tabanlı Lojistik Regresyon
+
+Sisteme Karadeniz'in turkuaz renkli fitoplankton patlamalarını içeren bir uydu görüntüsü yüklendiğinde, model su alanının büyük bir bölümünü (%56.5) **"Bitki Örtüsü"** olarak sınıflandırmıştır. 
+
+**Neden Böyle Oldu?**
+Fitoplankton patlamaları, piksel bazında çok yüksek "Yeşil (G)" yoğunluğuna sahiptir. Mevcut Lojistik Regresyon modelimiz piksellerin geometrik şekline, dokusuna veya bağlamına (spatial context) değil, yalnızca bağımsız RGB renk uzayına bakarak karar vermektedir. Model; yeşil tonu algıladığında, "Suyu yalnızca koyu mavi (düşük R, düşük G, yüksek B) olarak öğrenmiştim, bu bölgede yeşil yoğunluğu çok yüksek, dolayısıyla burası bitki örtüsüdür" mantığıyla hatalı bir çıkarım yapmıştır.
+
+**Mühendislik Çıkarımı ve Çözüm Önerisi:**
+Bu durum, bağımsız RGB pikselleriyle eğitilen temel sınıflandırma algoritmalarının limitlerini kanıtlayan muazzam bir "Edge Case" (uç durum) örneğidir. Gerçek uydu ve yer istasyonu operasyonlarında bu yanılgıyı ortadan kaldırmak için:
+1. **Sensör Geliştirmesi:** Standart RGB kameralar yerine Yakın Kızılötesi (NIR - Near Infrared) bantlarına sahip multispektral sensörler kullanılmalıdır.
+2. **Mimari Geliştirme:** Pikselleri tekil olarak değil, komşuluk ilişkileri ve şekilsel bütünlüğüyle (spatial coherence) analiz edebilmek için CNN (Evrişimli Sinir Ağları) gibi Derin Öğrenme mimarilerine geçiş yapılmalıdır.
