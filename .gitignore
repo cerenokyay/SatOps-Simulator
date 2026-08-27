@@ -21,3 +21,20 @@ env/
 # Veritabanı
 *.db
 *.sqlite3
+
+# Python & Sanal Ortam
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# İşletim Sistemi Dosyaları (Mac)
+.DS_Store
+
+# Veri Setleri ve Büyük Dosyalar
+data/
+*.pkl
+*.onnx.data
+
+# API Anahtarları ve Çevresel Değişkenler
+.env
